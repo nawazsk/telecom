@@ -94,7 +94,7 @@ class LoginForm extends Component<Props> {
 }
 
 LoginForm.defaultProps = {
-  className: 'row justify-content-space-around'
+  className: 'row pd1'
 };
 
 export default LoginForm;
