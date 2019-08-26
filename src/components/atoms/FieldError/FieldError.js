@@ -1,7 +1,7 @@
 // @flow
-import React from "react";
-import type { Node } from "react";
-import Para from "../Para";
+import React from 'react';
+import type { Node } from 'react';
+import Para from '../Para';
 type Props = {
   className?: string | void,
   children: Node,
@@ -16,7 +16,7 @@ const FieldError = ({ className, children, ...others }: Props): Node => (
 );
 
 FieldError.defaultProps = {
-  className: ""
+  className: 'error'
 };
 
 export default FieldError;

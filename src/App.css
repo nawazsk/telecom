@@ -49,12 +49,14 @@
 label {
   display: inline-block;
   max-width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 0.5em;
   font-weight: 700;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1.5em;
+  width: 100%;
+  position: relative;
 }
 
 .form-control {
@@ -97,6 +99,21 @@ label {
   background-color: #007bff;
   border-color: #007bff;
 }
-.justify-content-space-around {
+/* .justify-content-space-around {
   justify-content: space-around;
+} */
+
+.btnSubmit {
+  width: 24%;
+}
+.error {
+  color: #a90b0b;
+  margin: 0.5em 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 1.5em 0;
 }

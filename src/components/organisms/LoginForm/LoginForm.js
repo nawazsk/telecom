@@ -60,7 +60,7 @@ class LoginForm extends Component<Props> {
       id: 'loginEmail',
       ariaLabel: 'enter email',
       autoComplete: 'off',
-      className: 'form-group row',
+      className: 'form-group',
       fieldProps
     };
     /* this field is Password */
@@ -71,24 +71,24 @@ class LoginForm extends Component<Props> {
       id: 'loginPassword',
       ariaLabel: 'enter password',
       autoComplete: 'off',
-      className: 'form-group row',
+      className: 'form-group',
       fieldProps
     };
     // render elements
     return (
-      <div className={this.props.className}>
-        <Form {...loginFormProps}>
+      <Form {...loginFormProps}>
+        <div className={this.props.className}>
           <Heading HeadingType="h4">Please Login</Heading>
 
           <Form.Input {...emailFieldInputProps} />
 
           <Form.Input {...passwordFieldInputProps} />
 
-          <Button type="submit" className="btn btn-primary">
+          <Button type="submit" className="btn btn-primary btnSubmit">
             Login
           </Button>
-        </Form>
-      </div>
+        </div>
+      </Form>
     );
   }
 }
