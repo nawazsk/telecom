@@ -19,13 +19,18 @@ class LoginForm extends Component<Props> {
 
   submitLoginForm(values) {
     console.log('values', values);
+    const { emailField: username, passwordField: password } = values;
     axios({
-      url: '',
+      url: 'http://10.202.239.78:8080/auth-api/authenticate',
       method: 'post',
       headers: {
-        Accept: 'application/javascript'
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
       },
-      data: values
+      data: {
+        username,
+        password
+      }
     })
       .then(response => {
         console.log('response', response);
@@ -34,12 +39,13 @@ class LoginForm extends Component<Props> {
   }
 
   render() {
-    const locationFormProps = {
+    const loginFormProps = {
       initialValues: {
         emailField: '',
         passwordField: ''
       },
-      action: '/',
+      action: 'http://10.202.239.78:8080/auth-api/authenticate',
+      method: 'post',
       handleSubmit: this.submitLoginForm,
       validationSchema: ['emailField', 'passwordField']
     };
@@ -71,7 +77,7 @@ class LoginForm extends Component<Props> {
     // render elements
     return (
       <div className={this.props.className}>
-        <Form {...locationFormProps} bindFormikSubmit={this.bindFormikSubmit}>
+        <Form {...loginFormProps}>
           <Heading HeadingType="h4">Please Login</Heading>
 
           <Form.Input {...emailFieldInputProps} />
