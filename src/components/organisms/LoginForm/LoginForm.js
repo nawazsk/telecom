@@ -27,10 +27,10 @@ class LoginForm extends Component<Props> {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      data: {
+      data: JSON.stringify({
         username,
         password
-      }
+      })
     })
       .then(response => {
         console.log('response', response);
