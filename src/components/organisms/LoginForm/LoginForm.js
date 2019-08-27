@@ -6,7 +6,9 @@ import React, { Component } from 'react';
 import Form from '../../molecules/Form';
 import Button from '../../atoms/Button';
 import Heading from '../../atoms/Heading';
-import axios from 'axios';
+import AjaxFactoryUtil from '../../../utils/AjaxFactoryUtil';
+import Cookies from 'universal-cookie';
+
 type Props = {
   className?: string
 };
@@ -20,22 +22,35 @@ class LoginForm extends Component<Props> {
   submitLoginForm(values) {
     console.log('values', values);
     const { emailField: username, passwordField: password } = values;
-    axios({
-      url: 'http://10.202.239.78:8080/auth-api/authenticate',
+    const options = {
+      url: 'http://10.202.239.78:8086/login',
       method: 'post',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify({
+      data: {
         username,
         password
+      }
+    };
+    AjaxFactoryUtil.triggerServerRequest(options)
+      .then(({ body: { data, ajaxRequestStatus } }) => {
+        if (ajaxRequestStatus === 'SUCCESS') {
+          const { token } = data;
+          const cookies = new Cookies();
+          const minutes = 4;
+          const date = new Date();
+          date.setTime(date.getTime() + minutes * 60 * 1000);
+          cookies.set('_token', token, {
+            path: '/',
+            expires: date
+          });
+        }
       })
-    })
-      .then(response => {
-        console.log('response', response);
-      })
-      .catch(error => console.log(error));
+      .catch(({ body: { ajaxRequestStatus, errorCode, errorData } }) =>
+        console.error('errorCode', errorCode, 'errorData', errorData)
+      );
   }
 
   render() {
@@ -44,7 +59,7 @@ class LoginForm extends Component<Props> {
         emailField: '',
         passwordField: ''
       },
-      action: 'http://10.202.239.78:8080/auth-api/authenticate',
+      action: '/',
       method: 'post',
       handleSubmit: this.submitLoginForm,
       validationSchema: ['emailField', 'passwordField']
