@@ -25,7 +25,7 @@ const AjaxFactoryUtil = {
           if (!options.headers) {
             options.headers = {};
           }
-          options.headers['Authorization'] = `Bearer {${_token}}`;
+          options.headers['Authorization'] = `Bearer ${_token}`;
         }
       }
       const config = {
