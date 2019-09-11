@@ -10,6 +10,7 @@ import Paragraph from '../../atoms/Para';
 import AjaxFactoryUtil from '../../../utils/AjaxFactoryUtil';
 import Cookies from 'universal-cookie';
 import { LOGIN_API_URI, USER_DETAILS_URI } from './constants';
+import Loggger from "../../../utils/logger";
 type Props = {
   className?: string
 };
@@ -57,7 +58,7 @@ class LoginForm extends Component<Props> {
         }
       })
       .catch(({ body: { ajaxRequestStatus, errorCode, errorData } }) =>
-        console.error('errorCode', errorCode, 'errorData', errorData)
+        Loggger('errorCode', errorCode, 'errorData', errorData)
       );
   }
 
@@ -78,7 +79,7 @@ class LoginForm extends Component<Props> {
         }
       })
       .catch(({ body: { ajaxRequestStatus, errorCode, errorData } }) =>
-        console.error('errorCode', errorCode, 'errorData', errorData)
+        Loggger('errorCode', errorCode, 'errorData', errorData)
       );
   }
 
